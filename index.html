@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ahorcado</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>FUN FUNNY GAME PARA TODA LA FAMILIA Y EL PERRO</h1>
+    <div class="vineta">
+        <button id="pista" type="button">Pista</button>
+        <p id="frasePista"></p>
+
+        <div id="bars-hearts">
+            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/coraçao.png">
+        </div>
+        <p id="frasePeli" data-pelicula=""></p>
+
+    </div>
+    <div class="content-charts">
+        <progress value="0" max="59" id="progressBar"></progress>
+    </div>
+    
+    <div class="navbar bg-teclado">
+        <div class="navbar-teclado">
+            <button class="tecla" type="button">A</button>
+            <button class="tecla" type="button">B</button>
+            <button class="tecla" type="button">C</button>
+            <button class="tecla" type="button">D</button>
+            <button class="tecla" type="button">E</button>
+            <button class="tecla" type="button">F</button>
+            <button class="tecla" type="button">G</button>
+            <button class="tecla" type="button">H</button>
+            <button class="tecla" type="button">I</button>
+            <button class="tecla" type="button">J</button>
+            <button class="tecla" type="button">K</button>
+            <button class="tecla" type="button">L</button>
+            <button class="tecla" type="button">M</button>
+            <button class="tecla" type="button">N</button>
+            <button class="tecla" type="button">Ñ</button>
+            <button class="tecla" type="button">O</button>
+            <button class="tecla" type="button">P</button>
+            <button class="tecla" type="button">Q</button>
+            <button class="tecla" type="button">R</button>
+            <button class="tecla" type="button">S</button>
+            <button class="tecla" type="button">T</button>
+            <button class="tecla" type="button">U</button>
+            <button class="tecla" type="button">V</button>
+            <button class="tecla" type="button">W</button>
+            <button class="tecla" type="button">X</button>
+            <button class="tecla" type="button">Y</button>
+            <button class="tecla" type="button">Z</button>
+        </div>
+    </div>
+</div>
+<!-- MODAL -->
+<div id="MyModal" class="modal">
+    <div class="modal-content">
+        <p>Has perdido</p>
+        <button id="reintentar" type="button">Reintentar</button>
+    </div>
+</div>
+<!-- SCRIPTS -->
+<script src="dist/main.js"></script>
+</body>
+</html>
