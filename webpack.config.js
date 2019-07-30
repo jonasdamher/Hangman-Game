@@ -1,9 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  entry: './public/js/ahorcado.js',
+  entry: './public/js/index.js',
+  mode: 'development',
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   }
 };

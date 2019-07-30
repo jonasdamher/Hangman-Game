@@ -9,23 +9,23 @@
 </head>
 <body>
 <div class="container">
-    <h1>FUN FUNNY GAME PARA TODA LA FAMILIA Y EL PERRO</h1>
-    <div class="vineta">
-        <button id="pista" type="button">Pista</button>
-        <p id="frasePista"></p>
-
+    <h1 class="h1">AHORCADO</h1>
+    <div class="content-pistas-corazones">
         <div id="bars-hearts">
-            <img class="icon-heart" src="public/coraçao.png">
-            <img class="icon-heart" src="public/coraçao.png">
-            <img class="icon-heart" src="public/coraçao.png">
-            <img class="icon-heart" src="public/coraçao.png">
-            <img class="icon-heart" src="public/coraçao.png">
-            <img class="icon-heart" src="public/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
+            <img class="icon-heart" src="public/img/coraçao.png">
         </div>
-        <p id="frasePeli" data-pelicula=""></p>
-
+        <div class="content-pistas">
+            <p id="frasePista"></p>
+            <button id="pista" type="button">Pista</button>
+        </div>
     </div>
     <div class="content-charts">
+        <p id="pelicula"></p>
         <progress value="0" max="59" id="progressBar"></progress>
     </div>
     
@@ -61,14 +61,34 @@
         </div>
     </div>
 </div>
-<!-- MODAL -->
-<div id="MyModal" class="modal">
+<!-- MODAL Perder -->
+<div id="modalPerder" class="modal">
     <div class="modal-content">
         <p>Has perdido</p>
-        <button id="reintentar" type="button">Reintentar</button>
+        <button class="reintentar" type="button">Reintentar</button>
+    </div>
+</div>
+<!-- MODAL Ganar -->
+<div id="modalGanar" class="modal">
+    <div class="modal-content">
+        <p>Has Ganado</p>
+        <button class="reintentar" type="button">Jugar otra vez</button>
+    </div>
+</div>
+
+<!-- MODAL InicioDeJuego -->
+<div id="modalInicio" class="modal d-block">
+    <div class="modal-content">
+        <h2>¡Elige las Peliculas!</h2>
+        <form>
+            <label for="buscadorPeliculas">Buscar peliculas</label>
+            <input type="text" id="buscadorPeliculas" name="buscadorPeliculas" placeholder="Buscar...">
+            <button type="button" id="botonBuscador">Buscar</button>
+        </form>
+        <p id="mensajeBuscador" class="hide">Pelicula no encontrada!</p>
     </div>
 </div>
 <!-- SCRIPTS -->
-<script src="dist/main.js"></script>
+<script src="dist/bundle.js"></script>
 </body>
 </html>

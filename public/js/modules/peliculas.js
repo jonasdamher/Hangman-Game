@@ -1,0 +1,3 @@
+var peliculas = {};
+
+export {peliculas};

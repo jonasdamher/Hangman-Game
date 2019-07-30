@@ -13,7 +13,6 @@
 .navbar{
     margin: auto;
     padding: 1rem;
-    max-width: 800px;
 }
 
 .navbar-teclado{
@@ -52,7 +51,7 @@ button:hover{
     box-shadow: 0px 3px 0px #6b6b6b;
 }
 
-#frasePeli{
+#pelicula{
     font-size: xx-large;
     letter-spacing: 6px;
     text-align: center;
@@ -80,7 +79,6 @@ button:hover{
     width: 80%; /* Could be more or less, depending on screen size */
 }
 
-
 #progressBar{
     margin: 0.5rem 0;
     width: 100%;
@@ -96,4 +94,45 @@ button:hover{
 
 .hide{
     display: none;
+}
+
+.content-pistas{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.content-pistas-corazones{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.h1{
+    margin: 1rem;
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin: 0.5rem 0;
+}
+
+input{
+    font-size: 1rem;
+    padding: 1rem;
+    border: 0;
+    background-color: #bbbbbb;
+}
+
+::placeholder{
+    color: rgb(0, 0, 0);
+}
+
+.d-block{
+    display: block;
 }
