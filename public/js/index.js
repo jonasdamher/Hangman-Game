@@ -245,6 +245,9 @@ function quitarModal(idModal){
     document.getElementById(idModal).style.display = "none";
 }*/
 
+document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
+
+
 function peliculaApi(){
     let textoBuscar = document.getElementById('buscadorPeliculas').value.trim();
     if(textoBuscar!=''){
@@ -280,17 +283,6 @@ function comprobarPeliculaEnLista(peliculaEncontrada){
     return true;
 }
 
-document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
-
-/**
- * Cuando pulsas enter en el input buscador se pulta en boton del buscador
-*/
-document.getElementById('buscadorPeliculas').addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("botonBuscador").click();
-    }
-});
 
 function mensajeBuscador(){
     return document.getElementById('mensajeBuscador');
@@ -305,3 +297,13 @@ function mostrarListaDePeliculas(){
 function contarPeliculasDeObjeto(){
     return Object.keys(peliculas).length;
 }
+
+/**
+ * Cuando pulsas enter en el input buscador se pulsa el boton del buscador
+*/
+document.getElementById('buscadorPeliculas').addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("botonBuscador").click();
+    }
+});
