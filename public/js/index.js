@@ -246,29 +246,24 @@ function quitarModal(idModal){
 
 function ComprobarPeliculaApi(){
     let textoBuscar = document.getElementById('buscadorPeliculas').value.trim();
-
-    fetch('https://www.omdbapi.com/?apikey=61e63fb9&t='+textoBuscar)
-    .then(function(response){
-        response.json().then(function(data){
-            if(data.Response != 'False'){
-                let total = ++(Object.keys(peliculas).length);
-                peliculas["pelicula"+total] = data;
-                mensajeBuscador().classList.add('hide');
-                mostrarListaDePeliculas();
-                console.log('si está');
-
-            }else{
-                mensajeBuscador().innerHTML = 'No se ha encontrado la pelicula '+textoBuscar;
-                mensajeBuscador().classList.remove('hide');
-                console.log('no está');
-            }
+    if(textoBuscar!=''){
+        fetch('https://www.omdbapi.com/?apikey=61e63fb9&t='+textoBuscar)
+        .then(function(response){
+            response.json().then(function(data){
+                if(data.Response != 'False'){
+                    let total = ++(Object.keys(peliculas).length);
+                    peliculas["pelicula"+total] = data;
+                    mensajeBuscador().classList.add('hide');
+                    mostrarListaDePeliculas();
+    
+                }else{
+                    mensajeBuscador().innerHTML = 'No se ha encontrado la pelicula '+textoBuscar;
+                    mensajeBuscador().classList.remove('hide');
+                }
+            });
         });
-    });
-
-
+    }
 }
-
-//&apikey=61e63fb9
 
 document.getElementById('botonBuscador').addEventListener('click',ComprobarPeliculaApi, false); 
 
@@ -276,24 +271,21 @@ function mensajeBuscador(){
     return document.getElementById('mensajeBuscador');
 }
 
-document.getElementById("buscadorPeliculas").addEventListener("keyup", function(event){
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        $("#myButton").click();
-    }
-});
-
 function mostrarListaDePeliculas(){
-   for(var pelicula in peliculas){
-    /*
-    let node = document.createElement('p');
-    var textnode = document.createTextNode("Water");
-    node.appendChild(textnode);
-    document.getElementById('listaPeliculas').appendChild(node);
-    */
+    
+    var lista = document.getElementById('listaPeliculas');
 
-    console.log(pelicula['Title']);
-   }
-   console.log(peliculas);
+    var contenidoLista = document.getElementById('listaPeliculas').getElementsByTagName('li');
+    
+    if(contenidoLista.length>0){
+        for(let numero in contenidoLista){
+            lista.removeChild(contenidoLista[numero]);
+        }
+    }
 
+    for(let nombre in peliculas){
+        let parrafo = document.createElement('li');
+        parrafo.appendChild(document.createTextNode(peliculas[nombre].Title));
+        lista.appendChild(parrafo);
+    }
 }
