@@ -1,3 +1,0 @@
-var peliculas = {};
-
-export {peliculas};

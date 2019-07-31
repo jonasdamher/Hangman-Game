@@ -1,4 +1,5 @@
-import {peliculas} from './modules/peliculas';
+var peliculas = {};
+
 /*
 var timeleft = 60,
     vidas = 6,
@@ -244,17 +245,22 @@ function quitarModal(idModal){
     document.getElementById(idModal).style.display = "none";
 }*/
 
-function ComprobarPeliculaApi(){
+function peliculaApi(){
     let textoBuscar = document.getElementById('buscadorPeliculas').value.trim();
     if(textoBuscar!=''){
         fetch('https://www.omdbapi.com/?apikey=61e63fb9&t='+textoBuscar)
         .then(function(response){
             response.json().then(function(data){
                 if(data.Response != 'False'){
-                    let total = ++(Object.keys(peliculas).length);
-                    peliculas["pelicula"+total] = data;
-                    mensajeBuscador().classList.add('hide');
-                    mostrarListaDePeliculas();
+                    
+                    if(comprobarPeliculaEnLista(data)){
+                        peliculas["pelicula"+(++Object.keys(peliculas).length)] = data;
+                        mensajeBuscador().classList.add('hide');
+                        mostrarListaDePeliculas();
+                    }else{
+                        mensajeBuscador().innerHTML = 'La pelicula '+textoBuscar+' ya está en la lista';
+                        mensajeBuscador().classList.remove('hide');
+                    }
     
                 }else{
                     mensajeBuscador().innerHTML = 'No se ha encontrado la pelicula '+textoBuscar;
@@ -265,27 +271,37 @@ function ComprobarPeliculaApi(){
     }
 }
 
-document.getElementById('botonBuscador').addEventListener('click',ComprobarPeliculaApi, false); 
+function comprobarPeliculaEnLista(peliculaEncontrada){
+    for(var pelicula in peliculas){
+        if(peliculas[pelicula].Title == peliculaEncontrada.Title){
+            return false;
+        }
+    }
+    return true;
+}
+
+document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
+
+/**
+ * Cuando pulsas enter en el input buscador se pulta en boton del buscador
+*/
+document.getElementById('buscadorPeliculas').addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("botonBuscador").click();
+    }
+});
 
 function mensajeBuscador(){
     return document.getElementById('mensajeBuscador');
 }
 
 function mostrarListaDePeliculas(){
-    
-    var lista = document.getElementById('listaPeliculas');
+    let parrafo = document.createElement('li');
+    parrafo.appendChild(document.createTextNode(peliculas["pelicula"+contarPeliculasDeObjeto()].Title));
+    document.getElementById('listaPeliculas').appendChild(parrafo);
+}
 
-    var contenidoLista = document.getElementById('listaPeliculas').getElementsByTagName('li');
-    
-    if(contenidoLista.length>0){
-        for(let numero in contenidoLista){
-            lista.removeChild(contenidoLista[numero]);
-        }
-    }
-
-    for(let nombre in peliculas){
-        let parrafo = document.createElement('li');
-        parrafo.appendChild(document.createTextNode(peliculas[nombre].Title));
-        lista.appendChild(parrafo);
-    }
+function contarPeliculasDeObjeto(){
+    return Object.keys(peliculas).length;
 }
