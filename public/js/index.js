@@ -260,6 +260,7 @@ function peliculaApi(){
                         peliculas["pelicula"+(++Object.keys(peliculas).length)] = data;
                         mensajeBuscador().classList.add('hide');
                         mostrarListaDePeliculas();
+                        mostrarLista();
                     }else{
                         mensajeBuscador().innerHTML = 'La pelicula '+textoBuscar+' ya está en la lista';
                         mensajeBuscador().classList.remove('hide');
@@ -307,3 +308,8 @@ document.getElementById('buscadorPeliculas').addEventListener("keyup", function(
       document.getElementById("botonBuscador").click();
     }
 });
+
+function mostrarLista(){
+    var lista = document.getElementsByClassName('lista')[0];
+    lista.classList.remove('hide');
+}
