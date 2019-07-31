@@ -34,12 +34,32 @@ input{
     color: #1b1b1b;
 }
 
-button{
-    padding: 1rem;
-    margin: 0.5rem;
-    border: 0;
-    border-radius: .25rem;
-    color: #fff;
+/*
+    Referencias a ID
+*/
+
+#pelicula{
+    font-size: xx-large;
+    letter-spacing: 6px;
+    text-align: center;
+}
+
+#progressBar{
+    margin: .5rem;
+    width: calc(100% - 1rem);
+}
+
+#bars-hearts{
+    height: 36px;
+}
+
+#mensajeBuscador{
+    margin-top: 0.6rem;
+    font-size: .8rem;
+}
+
+#listaPeliculas{
+    list-style: none;
 }
 
 /*
@@ -73,6 +93,7 @@ button{
 .hide{
     display: none;
 }
+
 
 .content-pistas{
     display: flex;
@@ -110,10 +131,17 @@ button{
     padding: 1rem 0;
 }
 
-
 /*
     Botones
 */
+
+button{
+    padding: 1rem;
+    margin: 0.5rem;
+    border: 0;
+    border-radius: .25rem;
+    color: #fff;
+}
 
 .btn-rounded{
     padding: .8rem .9rem;
@@ -134,7 +162,6 @@ button{
     box-shadow: 0px 3px 0px rgb(128, 36, 36);
 }
 
-
 .btn-blue{
     background-color: #37c1ba;
     box-shadow: 0px 3px 0px #2a82a5;
@@ -154,36 +181,6 @@ button:disabled:hover{
     background-color: #505050;
     box-shadow: 0px 3px 0px #131313;
 }
-
-#pelicula{
-    font-size: xx-large;
-    letter-spacing: 6px;
-    text-align: center;
-}
-
-
-
-#progressBar{
-    margin: .5rem;
-    width: calc(100% - 1rem);
-}
-
-#bars-hearts{
-    height: 36px;
-}
-
-
-#mensajeBuscador{
-    margin-top: 0.6rem;
-    font-size: .8rem;
-}
-
-
-
-#listaPeliculas{
-    list-style: none;
-}
-
 
 /*
     Modals

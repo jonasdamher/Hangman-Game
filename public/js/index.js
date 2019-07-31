@@ -1,5 +1,7 @@
 var peliculas = {};
 
+var temporizador;
+
 var timeleft = 60,
     vidas = 6,
     contadorPeliculas = 1,
@@ -7,8 +9,7 @@ var timeleft = 60,
     nombrePeliculaPantalla = '';
 
 teclado();
-
-botonesRestablecerPartida();
+botonesModal();
 
 function tecla(){
     this.disabled = true;
@@ -47,7 +48,7 @@ function cargar(){
         mostrarCorazonesPartidaAnterior();
         if(contadorPistas>0){
             mostrarPista();
-}
+        }
 
         cogerPeliculaEnPantalla().innerHTML = nombrePeliculaPantalla;    
     }else{
@@ -58,8 +59,7 @@ function cargar(){
 // Coge una pelicula del objeto peliculas
 
 function cogerPeliculaDeObjeto(){
-    var peliActual = peliculas["pelicula"+contadorPeliculas];
-    return peliActual;
+    return peliculas["pelicula"+contadorPeliculas];
 }
 
 // Convierte un texto en guiones y devuelve el texto.
@@ -120,15 +120,16 @@ function comprobarPelicula(nombreDePelicula){
     if(cogerPeliculaEnPantalla().innerHTML == nombreDePelicula){
         fail();
 
-    }else if(contadorPeliculas>=Object.keys(peliculas).length){
-        mostrarModal('modalGanar');
-
     }else if(cogerPeliculaDeObjeto().Title==nombreDePelicula){
-        contadorPeliculas++;
-        timeleft = 60;
-        mostrarPeliculaEnPantalla();
-        restablecerTeclado();
-
+        if(contadorPeliculas>=contarPeliculasDeObjeto()){
+            mostrarModal('modalGanar');
+            pararTemporizador();
+        }else{
+            contadorPeliculas++;
+            timeleft = 60;
+            mostrarPeliculaEnPantalla();
+            restablecerTeclado();
+        }
     }else{
         cogerPeliculaEnPantalla().innerHTML = nombreDePelicula;
     }
@@ -172,13 +173,23 @@ function quitarCorazon(vidas){
 
 //Restablecer
 
-function botonesRestablecerPartida(){
-    for(var boton of document.getElementsByClassName("reintentar")){
-        boton.addEventListener("click", restablecerPartida, false); 
-    }
+function botonesModal(){
+    document.getElementById("volver").addEventListener("click", volveraInicio, false); 
+    document.getElementById("reintentar").addEventListener("click", restablecerPartida, false); 
+}
+
+function volveraInicio(){
+    restablecer();
+    pararTemporizador();
+    mostrarModal('modalInicio');
 }
 
 function restablecerPartida(){
+    restablecer();
+    iniciarTemporizador();
+}
+
+function restablecer(){
     vidas = 6;
     timeleft = 60;
     contadorPeliculas = 1;
@@ -220,17 +231,29 @@ function fail() {
 //funcion para cuando pierdes
 function gameOver() {
     mostrarModal('modalPerder');
+    pararTemporizador();
 }
 
 //progressbar de un minuto
-var downloadTimer = setInterval(function(){
-    document.getElementById("progressBar").value = 60 - timeleft;
-    --timeleft;
-    if(timeleft <= 0){
-      gameOver();
-    }
-  
-  }, 1000);
+
+function iniciarTemporizador(){
+
+    temporizador = setInterval(function(){
+        document.getElementById("progressBar").value = 60 - timeleft;
+        --timeleft;
+
+        if(timeleft <= 0){
+            clearInterval(temporizador);
+            gameOver();
+        }
+
+        console.log(timeleft);
+    }, 1000);
+}
+
+function pararTemporizador(){
+    clearInterval(temporizador);
+}
 
 function mostrarModal(idModal){
     document.getElementById(idModal).style.display = "block";
@@ -316,5 +339,7 @@ btnJugar.addEventListener("click", empezar);
 function empezar() {
     if (contarPeliculasDeObjeto() > 0) {
         quitarModal("modalInicio");
+        iniciarTemporizador();
+        mostrarPeliculaEnPantalla();
     }
 }
