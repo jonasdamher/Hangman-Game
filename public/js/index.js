@@ -1,6 +1,5 @@
 var peliculas = {};
 
-/*
 var timeleft = 60,
     vidas = 6,
     contadorPeliculas = 1,
@@ -11,10 +10,7 @@ teclado();
 
 botonesRestablecerPartida();
 
-cargar();
-
 function tecla(){
-    this.classList.add("button-disabled");
     this.disabled = true;
     compararPelicula(this);
 }
@@ -202,7 +198,6 @@ function restablecerTeclado(){
     let botones = document.getElementsByClassName("tecla");
     for(var boton of botones){
         boton.disabled = false;
-        boton.classList.remove("button-disabled");
     }
 }
 
@@ -243,10 +238,7 @@ function mostrarModal(idModal){
 
 function quitarModal(idModal){
     document.getElementById(idModal).style.display = "none";
-}*/
-
-document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
-
+}
 
 function peliculaApi(){
     let textoBuscar = document.getElementById('buscadorPeliculas').value.trim();
@@ -274,6 +266,8 @@ function peliculaApi(){
         });
     }
 }
+
+document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
 
 function comprobarPeliculaEnLista(peliculaEncontrada){
     for(var pelicula in peliculas){
