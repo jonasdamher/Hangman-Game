@@ -97,10 +97,6 @@ button{
     flex-direction: column;
 }
 
-.d-block{
-    display: block;
-}
-
 .button-form{
     display: flex;
     align-items: flex-end;
@@ -214,4 +210,8 @@ button:disabled:hover{
     width: 60%; /* Could be more or less, depending on screen size */
     max-width: 800px;
     min-width: 470px;
+}
+
+.d-block{
+    display: block;
 }

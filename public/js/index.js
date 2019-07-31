@@ -75,10 +75,10 @@ function convertirPeliculaEnGuiones(pelicula){
     return fraseConGuiones;
 }
 
-//Muestra en pantalla el nombre de la pelicula actual
+//Muestra en pantalla el Title de la pelicula actual
 
 function mostrarPeliculaEnPantalla(){
-    let pelicula = convertirPeliculaEnGuiones(cogerPeliculaDeObjeto().nombre);
+    let pelicula = convertirPeliculaEnGuiones(cogerPeliculaDeObjeto().Title);
     cogerPeliculaEnPantalla().innerHTML = pelicula;
     nombrePeliculaPantalla = pelicula;
 }
@@ -98,7 +98,7 @@ function compararPelicula(tecla){
 
 function buscarCoincidencias(letra){
 
-    var textoOriginal = cogerPeliculaDeObjeto().nombre.split(""), 
+    var textoOriginal = cogerPeliculaDeObjeto().Title.split(""), 
         texto_ = cogerPeliculaEnPantalla().innerHTML.split(""),
         textoModificado = '';
 
@@ -123,7 +123,7 @@ function comprobarPelicula(nombreDePelicula){
     }else if(contadorPeliculas>=Object.keys(peliculas).length){
         mostrarModal('modalGanar');
 
-    }else if(cogerPeliculaDeObjeto().nombre==nombreDePelicula){
+    }else if(cogerPeliculaDeObjeto().Title==nombreDePelicula){
         contadorPeliculas++;
         timeleft = 60;
         mostrarPeliculaEnPantalla();
@@ -306,4 +306,15 @@ document.getElementById('buscadorPeliculas').addEventListener("keyup", function(
 function mostrarLista(){
     var lista = document.getElementsByClassName('lista')[0];
     lista.classList.remove('hide');
+}
+
+
+//gab
+//boton jugar, pasa informacion api para empezar a jugar
+var btnJugar = document.getElementById("btnJugar");
+btnJugar.addEventListener("click", empezar);
+function empezar() {
+    if (contarPeliculasDeObjeto() > 0) {
+        quitarModal("modalInicio");
+    }
 }
