@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ahorcado</title>
+    <link rel="stylesheet" href="public/css/all.min.css">
     <link rel="stylesheet" href="public/css/style.css">
 </head>
 <body>
@@ -21,7 +22,7 @@
         </div>
         <div class="content-pistas">
             <p id="frasePista"></p>
-            <button id="pista" type="button">Pista</button>
+            <button class="btn-red" id="pista" type="button">Pista</button>
         </div>
     </div>
     <div class="content-charts">
@@ -29,36 +30,56 @@
         <progress value="0" max="59" id="progressBar"></progress>
     </div>
     
-    <div class="navbar bg-teclado">
+    <div class="navbar">
         <div class="navbar-teclado">
-            <button class="tecla" type="button">A</button>
-            <button class="tecla" type="button">B</button>
-            <button class="tecla" type="button">C</button>
-            <button class="tecla" type="button">D</button>
-            <button class="tecla" type="button">E</button>
-            <button class="tecla" type="button">F</button>
-            <button class="tecla" type="button">G</button>
-            <button class="tecla" type="button">H</button>
-            <button class="tecla" type="button">I</button>
-            <button class="tecla" type="button">J</button>
-            <button class="tecla" type="button">K</button>
-            <button class="tecla" type="button">L</button>
-            <button class="tecla" type="button">M</button>
-            <button class="tecla" type="button">N</button>
-            <button class="tecla" type="button">Ñ</button>
-            <button class="tecla" type="button">O</button>
-            <button class="tecla" type="button">P</button>
-            <button class="tecla" type="button">Q</button>
-            <button class="tecla" type="button">R</button>
-            <button class="tecla" type="button">S</button>
-            <button class="tecla" type="button">T</button>
-            <button class="tecla" type="button">U</button>
-            <button class="tecla" type="button">V</button>
-            <button class="tecla" type="button">W</button>
-            <button class="tecla" type="button">X</button>
-            <button class="tecla" type="button">Y</button>
-            <button class="tecla" type="button">Z</button>
+            <button class="tecla btn-red" type="button">A</button>
+            <button class="tecla btn-red" type="button">B</button>
+            <button class="tecla btn-red" type="button">C</button>
+            <button class="tecla btn-red" type="button">D</button>
+            <button class="tecla btn-red" type="button">E</button>
+            <button class="tecla btn-red" type="button">F</button>
+            <button class="tecla btn-red" type="button">G</button>
+            <button class="tecla btn-red" type="button">H</button>
+            <button class="tecla btn-red" type="button">I</button>
+            <button class="tecla btn-red" type="button">J</button>
+            <button class="tecla btn-red" type="button">K</button>
+            <button class="tecla btn-red" type="button">L</button>
+            <button class="tecla btn-red" type="button">M</button>
+            <button class="tecla btn-red" type="button">N</button>
+            <button class="tecla btn-red" type="button">Ñ</button>
+            <button class="tecla btn-red" type="button">O</button>
+            <button class="tecla btn-red" type="button">P</button>
+            <button class="tecla btn-red" type="button">Q</button>
+            <button class="tecla btn-red" type="button">R</button>
+            <button class="tecla btn-red" type="button">S</button>
+            <button class="tecla btn-red" type="button">T</button>
+            <button class="tecla btn-red" type="button">U</button>
+            <button class="tecla btn-red" type="button">V</button>
+            <button class="tecla btn-red" type="button">W</button>
+            <button class="tecla btn-red" type="button">X</button>
+            <button class="tecla btn-red" type="button">Y</button>
+            <button class="tecla btn-red" type="button">Z</button>
         </div>
+    </div>
+</div>
+<!-- MODAL InicioDeJuego -->
+<div id="modalInicio" class="modal d-block">
+    <div class="modal-content">
+        <h2>¡Elige las Peliculas!</h2>
+        <form>
+            <div class="input-form">
+                <label for="buscadorPeliculas">Buscar peliculas</label>
+                <input type="text" id="buscadorPeliculas" name="buscadorPeliculas" placeholder="Buscar..." autocomplete="off">
+            </div>
+            <div class="button-form">
+                <button type="button" id="botonBuscador" class="btn-blue btn-rounded m-0"><i class="fas fa-search fa-lg"></i></button>
+            </div>
+        </form>
+        <p id="mensajeBuscador" class="hide">Mensaje</p>
+        <div id="listaPeliculas">
+
+        </div>
+        <button type="button" class="btn-blue">Jugar</button>
     </div>
 </div>
 <!-- MODAL Perder -->
@@ -75,20 +96,8 @@
         <button class="reintentar" type="button">Jugar otra vez</button>
     </div>
 </div>
-
-<!-- MODAL InicioDeJuego -->
-<div id="modalInicio" class="modal d-block">
-    <div class="modal-content">
-        <h2>¡Elige las Peliculas!</h2>
-        <form>
-            <label for="buscadorPeliculas">Buscar peliculas</label>
-            <input type="text" id="buscadorPeliculas" name="buscadorPeliculas" placeholder="Buscar...">
-            <button type="button" id="botonBuscador">Buscar</button>
-        </form>
-        <p id="mensajeBuscador" class="hide">Pelicula no encontrada!</p>
-    </div>
-</div>
 <!-- SCRIPTS -->
+<script src="public/js/all.min.js"></script>
 <script src="dist/bundle.js"></script>
 </body>
 </html>

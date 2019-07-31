@@ -245,24 +245,26 @@ function quitarModal(idModal){
 }*/
 
 function ComprobarPeliculaApi(){
-    let textoBuscar = document.getElementById('buscadorPeliculas').value;
-    console.log(textoBuscar);
+    let textoBuscar = document.getElementById('buscadorPeliculas').value.trim();
 
     fetch('https://www.omdbapi.com/?apikey=61e63fb9&t='+textoBuscar)
     .then(function(response){
         response.json().then(function(data){
             if(data.Response != 'False'){
                 let total = ++(Object.keys(peliculas).length);
-                    peliculas["pelicula"+total] = data;
-                    mensajeBuscador().classList.add('hide');
+                peliculas["pelicula"+total] = data;
+                mensajeBuscador().classList.add('hide');
+                mostrarListaDePeliculas();
+                console.log('si está');
+
             }else{
                 mensajeBuscador().innerHTML = 'No se ha encontrado la pelicula '+textoBuscar;
                 mensajeBuscador().classList.remove('hide');
+                console.log('no está');
             }
         });
     });
 
-    console.log(peliculas);
 
 }
 
@@ -272,4 +274,26 @@ document.getElementById('botonBuscador').addEventListener('click',ComprobarPelic
 
 function mensajeBuscador(){
     return document.getElementById('mensajeBuscador');
+}
+
+document.getElementById("buscadorPeliculas").addEventListener("keyup", function(event){
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        $("#myButton").click();
+    }
+});
+
+function mostrarListaDePeliculas(){
+   for(var pelicula in peliculas){
+    /*
+    let node = document.createElement('p');
+    var textnode = document.createTextNode("Water");
+    node.appendChild(textnode);
+    document.getElementById('listaPeliculas').appendChild(node);
+    */
+
+    console.log(pelicula['Title']);
+   }
+   console.log(peliculas);
+
 }
