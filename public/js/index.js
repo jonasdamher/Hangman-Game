@@ -201,6 +201,19 @@ function volveraInicio(){
     restablecer();
     pararTemporizador();
     mostrarModal('modalInicio');
+    
+    localStorage.removeItem('partida');
+
+    Object.getOwnPropertyNames(peliculas).forEach(function (prop) {
+        delete peliculas[prop];
+    });
+
+    let listaPelisInicio = document.getElementById('listaPeliculas').getElementsByTagName('li');
+    for (const key in listaPelisInicio) {
+        document.getElementById('listaPeliculas').removeChild(listaPelisInicio[key]);
+    }
+
+    esconderLista();
 }
 
 function restablecerPartida(){
@@ -310,6 +323,7 @@ function peliculaApi(){
             });
         });
     }
+    document.getElementById('buscadorPeliculas').value = '';
 }
 
 document.getElementById('botonBuscador').addEventListener('click',peliculaApi, false); 
@@ -336,6 +350,11 @@ function mostrarListaDePeliculas(){
 function mostrarLista(){
     var lista = document.getElementsByClassName('lista')[0];
     lista.classList.remove('d-none');
+}
+
+function esconderLista(){
+    var lista = document.getElementsByClassName('lista')[0];
+    lista.classList.add('d-none');
 }
 
 /**
