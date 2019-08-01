@@ -281,8 +281,6 @@ function iniciarTemporizador(){
             clearInterval(temporizador);
             gameOver();
         }
-
-        console.log(timeleft);
     }, 1000);
 }
 
