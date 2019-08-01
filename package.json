@@ -6,6 +6,7 @@
     "@babel/core": "^7.5.5",
     "babel-env": "^2.4.1",
     "babel-loader": "^8.0.6",
+    "redis": "^2.8.0",
     "webpack": "^4.39.0"
   },
   "devDependencies": {
