@@ -1,12 +1,12 @@
 var peliculas = {};
 
-var temporizador;
-
-var timeleft = 60,
+var temporizador, timeleft = 60,
     vidas = 6,
     contadorPeliculas = 1,
     contadorPistas = 0,
     nombrePeliculaPantalla = '';
+
+cargar();
 
 teclado();
 botonesModal();
@@ -27,9 +27,10 @@ function guardar(){
     var objeto = {
         tiempo: timeleft,
         vidas: vidas,
-        peliActual: contadorPeliculas,
-        pistaActual: contadorPistas,
-        pelicula: nombrePeliculaPantalla
+        contadorPeliculas: contadorPeliculas,
+        peliculaActual: nombrePeliculaPantalla,
+        peliculas: peliculas,
+        contadorPistas: contadorPistas,
     };
 
     localStorage.setItem('partida', JSON.stringify(objeto));
@@ -41,18 +42,20 @@ function cargar(){
     if(partida){
         timeleft = partida.tiempo;
         vidas = partida.vidas;
-        contadorPeliculas = partida.peliActual;
-        contadorPistas = partida.pistaActual;
-        nombrePeliculaPantalla = partida.pelicula;
-    
+        contadorPeliculas = partida.contadorPeliculas;
+        nombrePeliculaPantalla = partida.peliculaActual;
+        peliculas = partida.peliculas;
+        contadorPistas = partida.contadorPistas;
+
         mostrarCorazonesPartidaAnterior();
         if(contadorPistas>0){
             mostrarPista();
         }
 
-        cogerPeliculaEnPantalla().innerHTML = nombrePeliculaPantalla;    
+        cogerPeliculaEnPantalla().innerHTML = nombrePeliculaPantalla;
+        iniciarTemporizador();  
     }else{
-        mostrarPeliculaEnPantalla();
+        mostrarModal('modalInicio');
     }
 }
 
@@ -60,6 +63,10 @@ function cargar(){
 
 function cogerPeliculaDeObjeto(){
     return peliculas["pelicula"+contadorPeliculas];
+}
+
+function contarPeliculasDeObjeto(){
+    return Object.keys(peliculas).length;
 }
 
 // Convierte un texto en guiones y devuelve el texto.
@@ -127,7 +134,9 @@ function comprobarPelicula(nombreDePelicula){
         }else{
             contadorPeliculas++;
             timeleft = 60;
+
             mostrarPeliculaEnPantalla();
+            restablecerPistas();
             restablecerTeclado();
         }
     }else{
@@ -140,7 +149,7 @@ function comprobarPelicula(nombreDePelicula){
 
 //Boton para pistas
 document.getElementById("pista").onclick = function() {
-    if(contadorPistas < Object.keys(peliculas["pelicula"+contadorPeliculas].pistas).length){
+    if(contadorPistas<2){
         pista();
     }
 }
@@ -153,9 +162,19 @@ function pista(){
 }
 
 function mostrarPista(){
-    let pistas = peliculas["pelicula"+contadorPeliculas].pistas;
+    let pista = '';
+
+    switch(contadorPistas){
+        case 1:
+            pista = 'Actors';
+            break;
+        case 2:
+            pista = 'Plot';
+            break;
+    }
+    let pistas = peliculas['pelicula'+contadorPeliculas][pista];
     
-    document.getElementById('frasePista').innerHTML = pistas['pista'+contadorPistas];
+    document.getElementById('frasePista').innerHTML = pistas;
 }
 
 function mostrarCorazonesPartidaAnterior(){
@@ -163,12 +182,12 @@ function mostrarCorazonesPartidaAnterior(){
     let corazones = document.querySelectorAll("#bars-hearts > img");
     
     for (let i = 0; i < (corazones.length - vidas); i++) {
-        corazones[i].classList.add("hide");
+        corazones[i].classList.add("d-none");
     }
 }
 
 function quitarCorazon(vidas){
-    document.querySelectorAll("#bars-hearts > img")[vidas].classList.add("hide");
+    document.querySelectorAll("#bars-hearts > img")[vidas].classList.add("d-none");
 }
 
 //Restablecer
@@ -193,16 +212,19 @@ function restablecer(){
     vidas = 6;
     timeleft = 60;
     contadorPeliculas = 1;
-    contadorPistas = 0;
     
     quitarModal('modalPerder');
     quitarModal('modalGanar');
 
-    document.getElementById('frasePista').innerHTML = "";
-    
+    restablecerPistas();
     mostrarPeliculaEnPantalla();
     restablecerTeclado();
     restablecerCorazones();
+}
+
+function restablecerPistas(){
+    contadorPistas = 0;
+    document.getElementById('frasePista').innerHTML = "";
 }
 
 function restablecerTeclado(){
@@ -215,7 +237,7 @@ function restablecerTeclado(){
 function restablecerCorazones(){
     let corazones = document.querySelectorAll("#bars-hearts > img");
     for(var corazon of corazones){
-        corazon.classList.remove("hide");
+        corazon.classList.remove("d-none");
     }
 }
 
@@ -273,17 +295,17 @@ function peliculaApi(){
                     
                     if(comprobarPeliculaEnLista(data)){
                         peliculas["pelicula"+(++Object.keys(peliculas).length)] = data;
-                        mensajeBuscador().classList.add('hide');
+                        mensajeBuscador().classList.add('d-none');
                         mostrarListaDePeliculas();
                         mostrarLista();
                     }else{
                         mensajeBuscador().innerHTML = 'La pelicula '+textoBuscar+' ya está en la lista';
-                        mensajeBuscador().classList.remove('hide');
+                        mensajeBuscador().classList.remove('d-none');
                     }
     
                 }else{
                     mensajeBuscador().innerHTML = 'No se ha encontrado la pelicula '+textoBuscar;
-                    mensajeBuscador().classList.remove('hide');
+                    mensajeBuscador().classList.remove('d-none');
                 }
             });
         });
@@ -301,7 +323,6 @@ function comprobarPeliculaEnLista(peliculaEncontrada){
     return true;
 }
 
-
 function mensajeBuscador(){
     return document.getElementById('mensajeBuscador');
 }
@@ -312,13 +333,15 @@ function mostrarListaDePeliculas(){
     document.getElementById('listaPeliculas').appendChild(parrafo);
 }
 
-function contarPeliculasDeObjeto(){
-    return Object.keys(peliculas).length;
+function mostrarLista(){
+    var lista = document.getElementsByClassName('lista')[0];
+    lista.classList.remove('d-none');
 }
 
 /**
  * Cuando pulsas enter en el input buscador se pulsa el boton del buscador
 */
+
 document.getElementById('buscadorPeliculas').addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
       event.preventDefault();
@@ -326,20 +349,15 @@ document.getElementById('buscadorPeliculas').addEventListener("keyup", function(
     }
 });
 
-function mostrarLista(){
-    var lista = document.getElementsByClassName('lista')[0];
-    lista.classList.remove('hide');
-}
-
-
 //gab
 //boton jugar, pasa informacion api para empezar a jugar
-var btnJugar = document.getElementById("btnJugar");
-btnJugar.addEventListener("click", empezar);
 function empezar() {
     if (contarPeliculasDeObjeto() > 0) {
         quitarModal("modalInicio");
         iniciarTemporizador();
         mostrarPeliculaEnPantalla();
+        guardar();
     }
 }
+
+document.getElementById("btnJugar").addEventListener("click", empezar);

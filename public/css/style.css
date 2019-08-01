@@ -90,11 +90,6 @@ input{
     width: 32px;
 }
 
-.hide{
-    display: none;
-}
-
-
 .content-pistas{
     display: flex;
     flex-direction: row;
@@ -146,6 +141,10 @@ button{
 .btn-rounded{
     padding: .8rem .9rem;
     border-radius: 50%;
+}
+
+i{
+    color: currentColor;
 }
 
 /* 
@@ -207,6 +206,10 @@ button:disabled:hover{
     width: 60%; /* Could be more or less, depending on screen size */
     max-width: 800px;
     min-width: 470px;
+}
+
+.d-none{
+    display: none;
 }
 
 .d-block{
