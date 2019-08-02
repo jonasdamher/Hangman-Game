@@ -4,8 +4,10 @@
   "description": "",
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/preset-flow": "^7.0.0",
     "babel-env": "^2.4.1",
     "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
     "redis": "^2.8.0",
     "webpack": "^4.39.0"
   },
