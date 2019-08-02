@@ -12,10 +12,11 @@ function volveraInicio(){
     pararTemporizador();
 
     let listaPelisInicio = document.getElementById('listaPeliculas').getElementsByTagName('li');
-    
+
     if(listaPelisInicio.length>0){
 
-        for (const key in listaPelisInicio) {
+        for (const key in listaPelisInicio.length) {
+            console.log(key);
             document.getElementById('listaPeliculas').removeChild(listaPelisInicio[key]);
         }
         utils.esconderLista();
@@ -26,6 +27,7 @@ function volveraInicio(){
 function restablecerPartida(){
     utils.hide('modalPerder');
     iniciarTemporizador();
+    utils.mostrarPeliculaEnPantalla();
 }
 
 function restablecer(){
@@ -33,7 +35,6 @@ function restablecer(){
     juego.timeleft = 60;
     juego.contadorPeliculas = 1;
     restablecerPistas();
-    utils.mostrarPeliculaEnPantalla();
     restablecerTeclado();
     restablecerCorazones();
 }
