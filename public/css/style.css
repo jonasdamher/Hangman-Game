@@ -122,8 +122,10 @@ input{
 .lista{
     margin-top: 1rem;
     padding: 1rem;
-    border: 1px solid rgb(226, 226, 226);
+    border: 1px solid rgb(214, 214, 214);
     background-color: rgb(238, 238, 238);
+    box-shadow: 0px 3px 0px #bdbdbd;
+    border-radius: .25rem;
 }
 
 .m-0{

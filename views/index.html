@@ -10,8 +10,11 @@
 </head>
 <body>
 <div class="container">
+
     <h1>AHORCADO</h1>
+
     <div class="content-pistas-corazones">
+        
         <div id="bars-hearts">
             <img class="icon-heart" src="public/img/life.png">
             <img class="icon-heart" src="public/img/life.png">
@@ -20,11 +23,14 @@
             <img class="icon-heart" src="public/img/life.png">
             <img class="icon-heart" src="public/img/life.png">
         </div>
+
         <div class="content-pistas">
             <p id="frasePista"></p>
             <button class="btn-red" id="pista" type="button">Pista</button>
         </div>
+
     </div>
+
     <div class="content-charts">
         <p id="pelicula"></p>
         <progress value="0" max="59" id="progressBar"></progress>
@@ -65,7 +71,9 @@
 <!-- MODAL InicioDeJuego -->
 <div id="modalInicio" class="modal">
     <div class="modal-content">
+
         <h2>¡Elige las Peliculas!</h2>
+
         <div class="form">
             <div class="input-form">
                 <label for="buscadorPeliculas">Buscar peliculas</label>
@@ -75,32 +83,42 @@
                 <button type="button" id="botonBuscador" class="btn btn-blue m-0"><i class="fas fa-search fa-lg"></i></button>
             </div>
         </div>
+
         <p id="mensajeBuscador" class="d-none">Mensaje</p>
+
         <div class="lista d-none">
             <p>Lista de peliculas</p>
             <ul id="listaPeliculas"></ul>
         </div>
+
         <div class="modal-footer">
             <button type="button" id="btnJugar" class="btn-blue btn-lg m-0">Jugar</button>
         </div>
+
     </div>
 </div>
 <!-- MODAL Ganar -->
 <div id="modalGanar" class="modal">
     <div class="modal-content">
+
         <h2>¡Has Ganado!</h2>
+
         <div class="modal-footer">
             <button type="button" id="volver" class="btn-blue btn-lg m-0">Jugar otra vez</button>
         </div>
+
     </div>
 </div>
 <!-- MODAL Perder -->
 <div id="modalPerder" class="modal">
     <div class="modal-content">
+
         <h2>¡Has perdido!</h2>
+
         <div class="modal-footer">
             <button type="button" id="reintentar" class="btn-blue btn-lg m-0">Reintentar</button>
         </div>
+
     </div>
 </div>
 <!-- SCRIPTS -->
